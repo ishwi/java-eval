@@ -3,19 +3,20 @@ package com.github.natanbc.javaeval;
 import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 import java.util.Collections;
+
 import java.util.List;
 
 public class CompilationException extends RuntimeException {
     private final String compilerOutput;
     private final List<Diagnostic<? extends JavaFileObject>> diagnostics;
 
-    CompilationException(String compilerOutput, List<Diagnostic<? extends JavaFileObject>> diagnostics) {
+    public CompilationException(String compilerOutput, List<Diagnostic<? extends JavaFileObject>> diagnostics) {
         this.compilerOutput = compilerOutput;
         this.diagnostics = diagnostics;
     }
 
     CompilationException() {
-        this(null, Collections.<Diagnostic<? extends JavaFileObject>>emptyList());
+        this(null, Collections.emptyList());
     }
 
     /**

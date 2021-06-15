@@ -53,7 +53,7 @@ public class JavaEvaluator {
             for(OutputJavaFileObject o : m.getGeneratedOutputFiles()) {
                 map.put(o.getClassName(), o.getBytes());
             }
-            return new CompilationResult(Collections.unmodifiableMap(map), null, Collections.<Diagnostic<? extends JavaFileObject>>emptyList());
+            return new CompilationResult(Collections.unmodifiableMap(map), null, Collections.emptyList());
         } else {
             throw new CompilationException();
         }
@@ -78,7 +78,7 @@ public class JavaEvaluator {
         StringWriter sw = new StringWriter();
         ListingDiagnosticListener listener = new ListingDiagnosticListener();
         try {
-            Map<String, byte[]> map = compile(listener, sw, options, classes, className, code).getClasses();
+            Map<String, byte[]> map = compile(listener, sw, options, classes, className, code).classes();
             String s = sw.toString();
             return new CompilationResult(map, s.isEmpty() ? null : s, Collections.unmodifiableList(listener.getDiagnostics()));
         } catch(CompilationException e) {
@@ -106,7 +106,7 @@ public class JavaEvaluator {
     /**
      * Creates a new {@link CompilationRequest}, useful for chaining calls and only setting wanted options
      *
-     * @return a new {@link CompilationRequest}
+     * @return a new {@link com.github.natanbc.javaeval.CompilationRequest}
      */
     public CompilationRequest compile() {
         return new CompilationRequest(this);

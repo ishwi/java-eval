@@ -19,7 +19,7 @@ public class SimpleFileManager extends ForwardingJavaFileManager<JavaFileManager
     }
 
     @Override
-    public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) throws IOException {
+    public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) {
         OutputJavaFileObject file = new OutputJavaFileObject(className, kind);
         outputFiles.add(file);
         return file;
@@ -30,7 +30,7 @@ public class SimpleFileManager extends ForwardingJavaFileManager<JavaFileManager
      *
      * @return the list of output files
      */
-    public List<OutputJavaFileObject> getGeneratedOutputFiles() {
+    List<OutputJavaFileObject> getGeneratedOutputFiles() {
         return outputFiles;
     }
 }

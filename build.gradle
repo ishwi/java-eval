@@ -1,25 +1,28 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.github.ben-manes.versions' version '0.13.0'
     id "com.github.johnrengelman.shadow" version "7.0.0"
 }
-repositories {
-    mavenCentral()
-}
-
-apply plugin: 'java-library'
-apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
 group = 'com.github.natanbc'
+version = "1.0.1"
+
 
 sourceCompatibility = 16
 targetCompatibility = 16
-
-dependencies {
-    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 
-
+publishing {
+    publications {
+        main(MavenPublication) {
+            //components.java
+            from components.java
+        }
+    }
+}
 
